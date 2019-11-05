@@ -62,6 +62,7 @@ class DQNAgent:
         self.training_initialized = False
 
     def create_model(self):
+        model = Sequential()
         model.add(Conv2D(32, (3,3), input_shape=(600,400,3)))
         model.add(Activation('relu'))
         model.add(BatchNormalization(axis=1))
