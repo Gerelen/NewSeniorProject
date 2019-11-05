@@ -20,7 +20,7 @@ if __name__ == '__main__':
     ep_rewards = []
     random.seed(1)
     np.random.seed(1)
-    episodes = 100
+    episodes = 5000
     epsilon_min = 0.0001
     epsilon_dec = 0.95
     epsilon = 1
@@ -73,12 +73,12 @@ if __name__ == '__main__':
         total_epsilon.append(epsilon)
         total_episode.append(episode)
 
-        if episode % 3 == 0 and episode != 0:
+        if episode % 50 == 0:
             min_reward = min(ep_rewards[-10:])
             """Plot epsilon over episode"""
-            print(total_epsilon,total_episode,ep_rewards)
-            utils.plot_overtime(total_episode, ep_rewards,total_epsilon) #Reward over time
-            agent.model.save('models/model{}.model'.format(reward))
+            #print(total_epsilon,total_episode,ep_rewards)
+            #utils.plot_overtime(total_episode, ep_rewards,total_epsilon) #Reward over time
+            agent.model.save('models/model{}.model'.format(episode))
 
     agent.terminate = True
     trainer_thread.join()

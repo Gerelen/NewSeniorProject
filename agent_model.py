@@ -1,4 +1,6 @@
-from keras.layers import Dense,Flatten,Dropout
+from keras.layers.convolutional import Conv2D, MaxPooling2D
+from keras.layers.normalization import BatchNormalization
+from keras.layers.core import Activation, Flatten, Dropout, Dense
 from keras.models import Sequential
 from keras.optimizers import Adam
 import tensorflow as tf 
@@ -60,14 +62,38 @@ class DQNAgent:
         self.training_initialized = False
 
     def create_model(self):
-        model = Sequential()
-        model.add(Dense(32, input_shape=(600,400,3), activation='relu'))
-        model.add(Dense(64, activation='relu'))
-        model.add(Dense(128,activation='relu'))
-        model.add(Dense(64,activation='relu'))
-        model.add(Dropout(0.2))
+        model.add(Conv2D(32, (3,3), input_shape=(600,400,3)))
+        model.add(Activation('relu'))
+        model.add(BatchNormalization(axis=1))
+        model.add(MaxPooling2D(pool_size=(5,5)))
+        model.add(Dropout(0.25))
+
+        model.add(Conv2D(64, (3,3)))
+        model.add(Activation('relu'))
+        model.add(BatchNormalization(axis=1))
+        model.add(Conv2D(64, (3,3)))
+        model.add(Activation('relu'))
+        model.add(BatchNormalization(axis=1))
+        model.add(MaxPooling2D(pool_size=(5,5)))
+        model.add(Dropout(0.25))
+
+        model.add(Conv2D(128, (3,3)))
+        model.add(Activation('relu'))
+        model.add(BatchNormalization(axis=1))
+        model.add(Conv2D(128, (3,3)))
+        model.add(Activation('relu'))
+        model.add(BatchNormalization(axis=1))
+        model.add(MaxPooling2D(pool_size=(3,3)))
+        model.add(Dropout(0.25))
+
         model.add(Flatten())
-        model.add(Dense(3, activation='softmax'))
+        model.add(Dense(512))
+        model.add(Activation('relu'))
+        model.add(BatchNormalization())
+        model.add(Dropout(0.5))
+
+        model.add(Dense(3))
+        model.add(Activation('softmax'))
         model.compile(loss='mse', optimizer=Adam(lr=0.001), metrics=['accuracy'])
 
         return model
@@ -80,7 +106,8 @@ class DQNAgent:
         return action
 
     def train(self):
-        if len(self.replay_memory) < 1000:
+        #Maybe change this to 1000 if anything goes bad
+        if len(self.replay_memory) < 64:
             return
 
         minibatch = random.sample(self.replay_memory, 16)

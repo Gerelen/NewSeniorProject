@@ -15,7 +15,7 @@ class CarlaEnvironment():
     show_cam = False
 
     def __init__(self):
-        self.client = carla.Client('localhost', 2000)
+        self.client = carla.Client('localhost', 10000)
         self.client.set_timeout(2.0)
         self.world = self.client.get_world()
         self.blueprint_library = self.world.get_blueprint_library()
