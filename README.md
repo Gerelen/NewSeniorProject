@@ -4,6 +4,6 @@ Carla AI
 # TODO LIST:
 
 
-- [ ] Add new features to agent_train.py
-- [ ] Also, modify modoels_network.py to make it more unique and useful
-- [ ] Start training the model
+- [x] Add new features to agent_train.py
+- [x] Also, modify agent_model.py to make it more unique and useful
+- [x] Start training the model
