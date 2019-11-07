@@ -11,12 +11,12 @@ class CarlaEnvironment():
     img_width, img_height = 600,400
     wait_camera = None
     return_camera = None
-    limit_time = 10
+    limit_time = 60
     show_cam = False
 
     def __init__(self):
-        self.client = carla.Client('localhost', 10000)
-        self.client.set_timeout(2.0)
+        self.client = carla.Client('localhost', 2000)
+        self.client.set_timeout(5.0)
         self.world = self.client.get_world()
         self.blueprint_library = self.world.get_blueprint_library()
         self.vehicle_bp = self.blueprint_library.filter('model3')[0]
@@ -94,7 +94,7 @@ class CarlaEnvironment():
             done = False
             reward = 1
 
-        if self.time_start + 10 < time.time():
+        if self.time_start + 60 < time.time():
             done = True
 
 
