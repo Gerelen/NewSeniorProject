@@ -1,13 +1,6 @@
 # MySeniorProject
 Carla AI
 
-# TODO LIST:
-
-
-- [x] Add new features to agent_train.py
-- [x] Also, modify agent_model.py to make it more unique and useful
-- [x] Start training the model
-
 # Instruction on how to install CARLA:
 
 1. Go to [Carla's Website](http://carla.org/2019/04/03/release-0.9.5/)
@@ -28,6 +21,14 @@ Carla AI
 
 1. To test the Agent run `test_agent.py`
 2. To train the Agent run `train_agent.py`
+
+# TODO LIST:
+
+
+- [x] Add new features to agent_train.py
+- [x] Also, modify agent_model.py to make it more unique and useful
+- [x] Start training the model
+
 
 # Special Thanks
 
