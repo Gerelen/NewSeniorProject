@@ -10,7 +10,7 @@ Carla AI
 5. Now, that we have the environment installed, we will need to install the CARLA Python library.
 
 
-# Instruction on how to install the CARLA Python Library:
+# Instruction on how to install the CARLA's Python Library:
 
 1. Navigate to CARLA_0.9.5\PythonAPI\carla\dist
 2. Once inside that folder you will need to install easy_install, with the command: `pip install setuptools`
