@@ -8,7 +8,7 @@ Carla AI
 - [x] Also, modify agent_model.py to make it more unique and useful
 - [x] Start training the model
 
-# Instruction to install CARLA:
+# Instruction on how to install CARLA:
 
 1 - Go to [Carla's Website](http://carla.org/2019/04/03/release-0.9.5/)
 2 - Download Version 0.95 for Windows.
@@ -16,7 +16,7 @@ Carla AI
 4 - CARLA, the environment should be all insatlled, now we have to install the python libary.
 
 
-# Instruction to install CARLA Python Library:
+# Instruction on how to install the CARLA Python Library:
 
 1 - Navigate to CARLA_0.9.5\PythonAPI\carla\dist
 2 - Once inside that folder you will need to install easy_install, with the command: `pip install setuptools`
