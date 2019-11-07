@@ -13,7 +13,8 @@ Carla AI
 1. Go to [Carla's Website](http://carla.org/2019/04/03/release-0.9.5/)
 2. Download Version 0.95 for Windows.
 3. After downloaded, extract the folder with name CALRA_0.9.5
-4. CARLA, the environment should be all insatlled, now we have to install the python libary.
+4. CARLA, the environment, is now installed. To run just click on CARLAUE4.
+5. Now, that we have the environment installed, we will need to install the CARLA Python library.
 
 
 # Instruction on how to install the CARLA Python Library:
