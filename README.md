@@ -30,4 +30,4 @@ Carla AI
 
 # Special Thanks
 
-I would like to thank [Sentdex](https://youtube.com/user/sentdex) for making a tutorial on CARLA. His tutorial was very useful in the making of this project.
+I would also like to thanks [Sentdex](https://youtube.com/user/sentdex) for making a tutorial on CARLA. His tutorial was very useful in the making of this project.
