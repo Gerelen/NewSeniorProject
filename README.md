@@ -19,8 +19,8 @@ Carla AI
 
 # How to start training or testing the AI
 
-1. To test the Agent run `test_agent.py`
-2. To train the Agent run `train_agent.py`
+1. To test the Agent run `agent_test.py` from the downloaded Github repository
+2. To train the Agent run `agent_test.py` from the downloaded Github repository
 
 # TODO LIST:
 
@@ -29,7 +29,7 @@ Carla AI
 - [x] Also, modify agent_model.py to make it more unique and useful
 - [x] Start training the model
 
-# Required Libaries
+# Required Libraries
 
 - [Click here to see](https://github.com/Gerelen/NewSeniorProject/edit/master/requirements.txt)
 
