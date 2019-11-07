@@ -1,7 +1,7 @@
 from keras.layers.convolutional import Conv2D, MaxPooling2D
 from keras.layers.normalization import BatchNormalization
-from keras.layers.core import Activation, Flatten, Dropout, Dense
-from keras.models import Sequential
+from keras.layers import Activation, Flatten, Dropout, Dense, GlobalAveragePooling2D
+from keras.models import Sequential, load_model
 from keras.optimizers import Adam
 import tensorflow as tf 
 import keras
@@ -47,9 +47,10 @@ class ModifiedTensorBoard(TensorBoard):
 
 class DQNAgent:
     def __init__(self):
-
-        self.model = self.create_model()
-        self.target_model = self.create_model()
+        self.model = load_model('models/model450.model')
+        #self.model = self.create_model()
+        #self.target_model = self.create_model()
+        self.target_model = load_model('models/model450.model')
 
         self.replay_memory = deque(maxlen=1000000)
 
@@ -63,38 +64,14 @@ class DQNAgent:
 
     def create_model(self):
         model = Sequential()
-        model.add(Conv2D(32, (3,3), input_shape=(600,400,3)))
-        model.add(Activation('relu'))
-        model.add(BatchNormalization(axis=1))
-        model.add(MaxPooling2D(pool_size=(5,5)))
-        model.add(Dropout(0.25))
 
-        model.add(Conv2D(64, (3,3)))
-        model.add(Activation('relu'))
-        model.add(BatchNormalization(axis=1))
-        model.add(Conv2D(64, (3,3)))
-        model.add(Activation('relu'))
-        model.add(BatchNormalization(axis=1))
-        model.add(MaxPooling2D(pool_size=(5,5)))
-        model.add(Dropout(0.25))
-
-        model.add(Conv2D(128, (3,3)))
-        model.add(Activation('relu'))
-        model.add(BatchNormalization(axis=1))
-        model.add(Conv2D(128, (3,3)))
-        model.add(Activation('relu'))
-        model.add(BatchNormalization(axis=1))
-        model.add(MaxPooling2D(pool_size=(3,3)))
-        model.add(Dropout(0.25))
-
+        model.add(Dense(64, input_shape=(600,400,3), activation='relu'))
+        model.add(Dense(64, activation='relu'))
+        model.add(Dense(64, activation='relu'))
+        model.add(GlobalAveragePooling2D())
         model.add(Flatten())
-        model.add(Dense(512))
-        model.add(Activation('relu'))
-        model.add(BatchNormalization())
-        model.add(Dropout(0.5))
-
         model.add(Dense(3))
-        model.add(Activation('softmax'))
+        model.add(Activation('linear'))
         model.compile(loss='mse', optimizer=Adam(lr=0.001), metrics=['accuracy'])
 
         return model
@@ -108,6 +85,7 @@ class DQNAgent:
 
     def train(self):
         #Maybe change this to 1000 if anything goes bad
+
         if len(self.replay_memory) < 64:
             return
 
@@ -154,13 +132,13 @@ class DQNAgent:
             self.target_update_counter = 0
 
     def get_qs(self, state):
-        return self.model.predict(np.array(state).reshape(-1,600,400,3)/255)[0]
+        return self.model.predict(np.array(state).reshape(1,600,400,3)/255)[0]
 
     def train_in_loop(self):
         X = np.random.uniform(size=(1, 600, 400, 3)).astype(np.float32)
         y = np.random.uniform(size=(1, 3)).astype(np.float32)
         with self.graph.as_default():
-            self.model.fit(X,y, verbose=False, batch_size=1)
+            self.model.fit(X,y, verbose=0, batch_size=1)
 
         self.training_initialized = True
 
