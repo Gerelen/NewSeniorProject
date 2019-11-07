@@ -7,7 +7,6 @@ from matplotlib.animation import FuncAnimation
 fig,axs = plt.subplots(2)
 
 def plot_overtime(x,y,y2):
-
 	fig.suptitle('Reward and Epsilon over episodes')
 	axs[0].plot(x,y, 'tab:orange', label='Reward')
 	axs[1].plot(x,y2,'tab:green',label='Epsilon')
