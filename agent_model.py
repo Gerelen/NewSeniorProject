@@ -68,7 +68,6 @@ class DQNAgent:
         model.add(Dense(64, input_shape=(600,400,3), activation='relu'))
         model.add(Dense(64, activation='relu'))
         model.add(Dense(64, activation='relu'))
-        model.add(GlobalAveragePooling2D())
         model.add(Flatten())
         model.add(Dense(3))
         model.add(Activation('linear'))
