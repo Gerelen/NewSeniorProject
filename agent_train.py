@@ -9,9 +9,6 @@ import utils
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 
-env = CarlaEnvironment()
-agent = DQNAgent()
-
 
 """Code taken/implemented from https://pythonprogramming.net/reinforcement-learning-self-driving-autonomous-cars-carla-python/"""
 
@@ -22,16 +19,22 @@ if __name__ == '__main__':
     np.random.seed(1)
     episodes = 5000
     epsilon_min = 0.0001
-    epsilon_dec = 0.95
+    epsilon_dec = 0.96
     epsilon = 1
     model_name = 'carla'
     total_epsilon,total_episode = [],[]
+
+    gpu_options = tf.GPUOptions(per_process_gpu_memory_fraction=0.4)
+    backend.set_session(tf.Session(config=tf.ConfigProto(gpu_options=gpu_options)))
+
+    env = CarlaEnvironment()
+    agent = DQNAgent()
 
     trainer_thread = Thread(target=agent.train_in_loop, daemon=True)
     trainer_thread.start()
     while not agent.training_initialized:
         time.sleep(0.01)
-    agent.get_qs(np.ones((600, 400, 3)))
+    agent.get_qs(np.ones((1, 600, 400, 3)))
 
     # Iterate over episodes
     for episode in range(episodes):
@@ -83,3 +86,4 @@ if __name__ == '__main__':
     agent.terminate = True
     trainer_thread.join()
     agent.model.save('model{}.model'.format(episode))
+    utils.plot_overtime(total_episode, ep_rewards,total_epsilon)
