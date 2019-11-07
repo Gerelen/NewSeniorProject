@@ -29,6 +29,9 @@ Carla AI
 - [x] Also, modify agent_model.py to make it more unique and useful
 - [x] Start training the model
 
+# Required Libaries
+
+- [Click here to see](https://github.com/Gerelen/NewSeniorProject/edit/master/requirements.txt)
 
 # Special Thanks
 
